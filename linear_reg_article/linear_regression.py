@@ -31,13 +31,17 @@ def predict_price(dates,prices,x):
 	prices = np.reshape(prices,(len(prices),1))
 	linear_mod.fit(dates,prices) #fitting the data points in the model
 	predicted_price =linear_mod.predict(x)
-	return predicted_price[0][0],linear_mod.coef_ ,linear_mod.intercept_
+	return predicted_price[0][0],linear_mod.coef_[0][0] ,linear_mod.intercept_[0]
 
-get_data('google.csv')
+get_data('google.csv') # calling get_data method by passing the csv file to it
 print dates
 print prices
 print "\n"
-show_plot(dates,prices)
+
+show_plot(dates,prices) 
+#image of the plot will be generated. Save it if you want and then Close it to continue the execution of the below code.
+
 predicted_price, coefficient, constant = predict_price(dates,prices,29)  
 print "The stock open price for 29th Feb is: $",str(predicted_price)
 print "The regression coefficient is ",str(coefficient),", and the constant is ", str(constant)
+print "the relationship equation between dates and prices is: price = ",str(coefficient),"* date + ",str(constant) 
